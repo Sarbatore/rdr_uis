@@ -1,0 +1,75 @@
+
+DatabindingAddDataContainer(entryId, "")
+DatabindingAddDataBool
+DatabindingAddDataBoolByHash
+DatabindingAddDataFloat
+DatabindingAddDataGangId
+DatabindingAddDataHash
+DatabindingAddDataInt
+DatabindingAddDataPosseId
+DatabindingAddDataString
+DatabindingAddHashArray
+DatabindingAddStringArray
+DatabindingAddUiItemList
+
+
+
+DatabindingAddDataContainerFromPath("", "")
+DatabindingAddDataBoolFromPath
+DatabindingAddDataStringFromPath
+DatabindingAddUiItemListFromPath
+
+DatabindingAddDataContainerByHash(entryId, hash)
+DatabindingAddDataHashByHash
+DatabindingAddDataIntByHash
+DatabindingAddDataStringByHash
+DatabindingAddUiItemListByHash
+
+
+
+DatabindingClearBindingArray
+DatabindingGetArrayCount(entryId)
+DatabindingGetDataContainerFromChildIndex(entryId, int)
+
+DatabindingGetDataContainerFromPath("")
+DatabindingGetItemContextByIndex(uiItemlistEntryId, int)
+
+DatabindingInsertUiItemToListFromContextHashAlias
+DatabindingInsertUiItemToListFromContextStringAlias
+DatabindingInsertUiItemToListFromPathStringAlias
+
+DatabindingIsEntryValid
+
+DatabindingReadDataBool
+DatabindingReadDataBoolFromParent
+DatabindingReadDataBoolFromParentByHash
+DatabindingReadDataHashStringFromParent
+DatabindingReadDataHashStringFromParentByHash
+
+DatabindingReadDataIntFromParent
+DatabindingReadDataIntFromParentByHash
+DatabindingReadDataString
+DatabindingReadDataStringFromParent
+DatabindingReadFloat
+DatabindingReadHash
+DatabindingReadInt
+
+DatabindingRemoveBindingArrayItemByDataContextId
+DatabindingRemoveDataEntry(entryId)
+
+DatabindingSetTemplatedUiItemHashAlias
+DatabindingSetTemplatedUiItemListSize
+
+DatabindingWriteDataBool
+DatabindingWriteDataBoolFromParent
+DatabindingWriteDataFloat
+DatabindingWriteDataGangId
+
+Citizen.Invoke(0x05ac9e1e02975afb, )
+Citizen.Invoke(0xBFC83DA249BEFCC9, )
+Citizen.Invoke(0x6318FB3BE37E11B3, )
+Citizen.Invoke(0xD7DB94AB78E8EBE4, "", hash)
+Citizen.Invoke(0x6329C34BEE5BFF4B, entryId, hash)
+Citizen.Invoke(0xA3BD6FF95E713EE5, entryId, hash, XXX)
+Citizen.Invoke(0x81D7183E7A8ECA72, XXX) -- Get posse type hash (joaat("NM_MW_POSSE_TYPE_TEMPORARY") | joaat("NM_MW_POSSE_TYPE_PERSISTENT"))
+Citizen.Invoke(0xD48993A61938C64D, XXX, "options")
