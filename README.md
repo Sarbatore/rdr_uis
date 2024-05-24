@@ -6,7 +6,7 @@ Feel free to contribute for experimented.
 
 SEE MORE OF MY WORK: https://srb-scripts.tebex.io
 
-[img]https://i.imgur.com/hFLBtws.png[/img]
+[Imgur](https://imgur.com/hFLBtws)
 
 ## FEATURES:
 ### Menu
