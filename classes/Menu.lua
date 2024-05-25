@@ -70,15 +70,8 @@ function Menu:AddItem(text)
 
     local newItem = nil
     for i=1, #self.items do
-        local item = nil
-
-        if (self.type == "image") then
-            item = ImageItem(self.listItems, i)
-        else
-            item = Item(self.listItems, i)
-        end
-        
-        item:SetText(self.items[i])
+        local item = Item(self.listItems, i, self.type)
+            :SetText(self.items[i])
 
         if (i == #self.items) then
             newItem = item

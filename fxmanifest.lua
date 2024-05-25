@@ -8,7 +8,6 @@ version "1.1"
 client_scripts {
   "functions.lua",
   
-  "classes/Item.lua",
   "classes/*.lua",
 
   "example.lua",

@@ -7,12 +7,17 @@ setmetatable(Item, {
     end
 })
 
-function Item._construct(list, index)
+function Item._construct(list, index, type)
     local self = setmetatable({}, Item)
 
     self.data = DatabindingAddDataContainer(list, "listItemData" .. tostring(index))
+    self.type = type
     
-    DatabindingInsertUiItemToListFromContextStringAlias(list, index, "pm_dynamic_text_item", self.data)
+    if (type == "image") then
+        DatabindingInsertUiItemToListFromContextStringAlias(list, index, "pm_dynamic_large_image_and_stacked_text", self.data)
+    else
+        DatabindingInsertUiItemToListFromContextStringAlias(list, index, "pm_dynamic_text_item", self.data)
+    end
 
     return self
 end
@@ -49,6 +54,30 @@ end
 ---@return Item
 function Item:SetVisible(bool)
     DatabindingAddDataBool(self.data, "dynamic_list_item_visible", bool)
+
+    return self
+end
+
+
+-- Image Type
+
+--- Set the item texture dictionary
+---@param dict hash
+---@return Item
+function Item:SetImgTextureDict(dict)
+    if (self.type ~= "image") then return self end
+    DatabindingAddDataHash(self.data, "dynamic_list_item_main_img_texture_dic", dict)
+
+    return self
+end
+
+--- Set the item texture
+---@param texture hash
+---@return Item
+function Item:SetImgTexture(texture)
+    if (self.type ~= "image") then return self end
+
+    DatabindingAddDataHash(self.data, "dynamic_list_item_main_img_texture", texture)
 
     return self
 end
