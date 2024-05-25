@@ -10,9 +10,10 @@ setmetatable(Menu, {
 --- Create a new menu
 ---@param headerText
 ---@return self
-function Menu._construct(headerText)
+function Menu._construct(type)
     local self = setmetatable({}, Menu)
 
+    self.type = type
     self.root = DatabindingAddDataContainerFromPath("", "player_menu_data")
 
     self.itemList = DatabindingAddDataContainerFromPath("", "AnimalSightingMissions")
@@ -61,23 +62,51 @@ end
 
 --- Add an item to the menu
 ---@param text
----@return entryId
+---@return Item
 function Menu:AddItem(text)
     table.insert(self.items, text)
 
     DatabindingClearBindingArray(self.listItems)
 
-    local entryId = nil
+    local newItem = nil
     for i=1, #self.items do
-        local item = Item(self.listItems, i)
-            :SetText(self.items[i])
+        local item = nil
+
+        if (self.type == "image") then
+            item = ImageItem(self.listItems, i)
+        else
+            item = Item(self.listItems, i)
+        end
+        
+        item:SetText(self.items[i])
 
         if (i == #self.items) then
-            entryId = item
+            newItem = item
         end
     end
 
-    return entryId
+    return newItem
+end
+
+--- Add an image item to the menu
+---@param text
+---@return ImageItem
+function Menu:AddImageItem(text)
+    table.insert(self.items, text)
+
+    DatabindingClearBindingArray(self.listItems)
+
+    local newItem = nil
+    for i=1, #self.items do
+        local item = ImageItem(self.listItems, i)
+            :SetText(self.items[i])
+
+        if (i == #self.items) then
+            newItem = item
+        end
+    end
+
+    return newItem
 end
 
 --- Remove an item from the menu
