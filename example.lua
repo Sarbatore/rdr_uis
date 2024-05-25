@@ -54,7 +54,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(5)
 
 		if (IsControlJustPressed(0, 0x760A9C6F)) then
-			OpenMenu("image")
+			OpenMenu()
 		end
 	end
 end)

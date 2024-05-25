@@ -70,7 +70,21 @@ DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_text", hash) 
 DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_enabled", true) -- 65
 DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_visible", true) -- 66
 DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_select_hash", hash) -- 67
-    
+
+-----------------------------
+--      AVAILABLE ITEMS    --
+-----------------------------
+pm_dynamic_text_item -- DONE
+pm_dynamic_text_and_end_image
+pm_dynamic_text_and_end_image_hold
+pm_dynamic_text_and_end_image_and_corner_end_image
+pm_dynamic_large_image_and_stacked_text -- DONE
+pm_dynamic_large_image_and_stacked_text_with_fill
+pm_dynamic_posse_entry
+pm_dynamic_player_entry
+pm_dynamic_horse_list_item
+pm_dynamic_vehicle_list_item
+pm_dynamic_small_image
 
 func_874 Var17
 func_2091
