@@ -57,19 +57,38 @@ DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_img_one_texture", VA
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_img_one_visible", VALUETYPETOFIND) -- 49
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_int_field_one_value", VALUETYPETOFIND) -- 50
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_int_field_two_value", VALUETYPETOFIND) -- 51
-DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_vector_field_one_value", VALUETYPETOFIND) -- 52
-DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_bool_field_one_value", VALUETYPETOFIND) -- 53
-DatabindingAddDataHash(self.data, "dynamic_list_item_link", hash) -- 54
-DatabindingAddDataHash(self.data, "dynamic_list_item_event_channel_hash", hash) -- 55
-DatabindingAddDataHash(self.data, "dynamic_list_item_focus_hash", hash) -- 56
-DatabindingAddDataHash(self.data, "dynamic_list_item_select_hash", hash) -- 57 sometimes the hash is -1292785935
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_text", hash) -- 58
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_enabled", true) -- 59
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_visible", true) -- 60
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_text", hash) -- 64
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_enabled", true) -- 65
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_visible", true) -- 66
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_select_hash", hash) -- 67
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_bool_field_one_value", VALUETYPETOFIND) -- 52
+DatabindingAddDataHash(self.data, "dynamic_list_item_link", hash) -- 53
+DatabindingAddDataHash(self.data, "dynamic_list_item_event_channel_hash", hash) -- 54
+DatabindingAddDataHash(self.data, "dynamic_list_item_focus_hash", hash) -- 55
+DatabindingAddDataHash(self.data, "dynamic_list_item_select_hash", hash) -- 56 sometimes the hash is -1292785935
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_text", hash) -- 57
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_enabled", true) -- 58
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_visible", true) -- 59
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_text", hash) -- 60
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_enabled", true) -- 61
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_visible", true) -- 62
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_select_hash", hash) -- 63
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_toggle_text", VALUETYPETOFIND) -- 64
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_toggle_enabled", VALUETYPETOFIND) -- 65
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_toggle_visible", VALUETYPETOFIND) -- 66
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_toggle_select_hash", VALUETYPETOFIND) -- 67
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_r3_text", VALUETYPETOFIND) -- 68
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_r3_enabled", VALUETYPETOFIND) -- 69
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_prompt_r3_visible", VALUETYPETOFIND) -- 70
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_select_r3_select_hash", VALUETYPETOFIND) -- 71
+DatabindingAddDataXXXXX(self.data, "mount_collection_index", VALUETYPETOFIND) -- 72
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_rename_prompt_enabled", VALUETYPETOFIND) -- 73
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_rename_prompt_visible", VALUETYPETOFIND) -- 74
+DatabindingAddDataXXXXX(self.data, "dynamic_list_item_stats_info_toggle_prompt_text", VALUETYPETOFIND) -- 75
+DatabindingAddDataXXXXX(self.data, "invite_unique_id", VALUETYPETOFIND) -- 76
+DatabindingAddDataXXXXX(self.data, "invite_tracked", VALUETYPETOFIND) -- 77
+DatabindingAddDataXXXXX(self.data, "invite_processed", VALUETYPETOFIND) -- 78
+DatabindingAddDataXXXXX(self.data, "invite_script_type", VALUETYPETOFIND) -- 79
+DatabindingAddDataXXXXX(self.data, "invite_gang_id", VALUETYPETOFIND) -- 80
+DatabindingAddDataXXXXX(self.data, "invite_expiration_time", VALUETYPETOFIND) -- 81
+DatabindingAddDataXXXXX(self.data, "invite_filter_type", VALUETYPETOFIND) -- 82
+DatabindingAddDataXXXXX(self.data, "invite_feed_message_id", VALUETYPETOFIND) -- 83
 
 -----------------------------
 --      AVAILABLE ITEMS    --
@@ -85,26 +104,3 @@ pm_dynamic_player_entry
 pm_dynamic_horse_list_item
 pm_dynamic_vehicle_list_item
 pm_dynamic_small_image
-
-func_874 Var17
-func_2091
-func_1423
-func_1422
-
-Var17 = 1;
-	Var17.f_1 = 1;
-	Var17.f_2 = joaat("COLOR_WHITE");
-	Var17.f_4 = -1;
-	Var17.f_5 = -1;
-	Var17.f_6 = -1;
-	Var17.f_10 = -1;
-	Var17.f_11 = -1;
-	Var17.f_12 = -1;
-	Var17.f_18 = joaat("COLOR_WHITE");
-	Var17.f_19 = joaat("COLOR_WHITE");
-    Var17.f_16 = MISC::_CREATE_VAR_STRING(0, Var10.f_1);
-    Var17.f_17 = MISC::_CREATE_VAR_STRING(0, Var10.f_2);
-    Var17.f_20 = MISC::GET_HASH_KEY("toasts_mp_generic");
-    Var17.f_21 = MISC::GET_HASH_KEY("TOAST_MP_ANIMAL");
-    Var17.f_4 = joaat("PLAYER_MENU");
-    Var17.f_5 = -1292785935;
