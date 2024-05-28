@@ -1,7 +1,8 @@
 function OpenMenu(type)
 	-- Create the menu
 	local menu = Menu(type)
-		:SetHeader("Title")
+		:SetHeader("Main Menu")
+		:SetSubheader("The first menu")
 		:SetFooter("Footer")
 		:SetFooterColor(joaat("COLOR_GREEN"))
 		

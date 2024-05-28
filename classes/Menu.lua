@@ -18,6 +18,10 @@ function Menu._construct(type)
 
     self.itemList = DatabindingAddDataContainerFromPath("", "AnimalSightingMissions")
     self.listItems = DatabindingAddUiItemList(self.itemList, "listItems")
+
+    self:SetHeader("")
+    self:SetSubheader("")
+    self:SetFooter("")
     
     self.items = {}
 
@@ -36,8 +40,8 @@ end
 --- Set the subheader text of the menu
 ---@param text
 ---@return self
-function Menu:SetSubheaderText(text)
-    self.subheader = DatabindingAddDataString(self.root, "sub_header_text", text) -- THIS DOESNT WORK NEED TO FIND THE CORRECT
+function Menu:SetSubheader(text)
+    AddTextEntryByHash(joaat("ANIMAL_SIGHTINGS_SUBH"), text)
 
     return self
 end
