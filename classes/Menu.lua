@@ -25,6 +25,46 @@ function Menu._construct(type)
     
     self.items = {}
 
+    Citizen.CreateThread(function()
+        while IsUiappRunningByHash(joaat("PLAYER_MENU")) == 1 do
+            while EventsUiIsPending(joaat("PLAYER_MENU")) do
+                local msg = DataView.ArrayBuffer(8 * 4)
+                msg:SetInt32(0, 0)
+                msg:SetInt32(8, 0)
+                msg:SetInt32(16, 0)
+                msg:SetInt32(24, 0) -- item data container
+    
+                if (Citizen.InvokeNative(0x90237103F27F7937, joaat("PLAYER_MENU"), msg:Buffer()) ~= 0) then -- EVENTS_UI_PEEK_MESSAGE
+                    -- Item focused
+                    if msg:GetInt32(0) == `ITEM_FOCUSED` then
+                        for k, v in ipairs(self.items) do
+                            if (msg:GetInt32(24) == v.data) then
+                                v:OnFocused()
+                                break
+                            end
+                        end
+                    end
+
+                    -- Item selected
+                    if msg:GetInt32(0) == `ITEM_SELECTED` then
+                        for k, v in ipairs(self.items) do
+                            if (msg:GetInt32(24) == v.data) then
+                                -- Check if the item is enabled
+                                if (DatabindingReadDataBool(v.data, "dynamic_list_item_enabled")) then
+                                    v:OnSelected()
+                                end
+                                break
+                            end
+                        end
+                    end
+                end
+    
+                EventsUiPopMessage(joaat("PLAYER_MENU"))
+            end
+            Citizen.Wait(0)
+        end
+    end)
+
     return self
 end
 
@@ -68,51 +108,25 @@ end
 ---@param text
 ---@return Item
 function Menu:AddItem(text)
-    table.insert(self.items, text)
+    local item = Item(self.listItems, #self.items+1, self.type)
+        :SetText(text)
 
-    DatabindingClearBindingArray(self.listItems)
+    table.insert(self.items, item)
 
-    local newItem = nil
-    for i=1, #self.items do
-        local item = Item(self.listItems, i, self.type)
-            :SetText(self.items[i])
-
-        if (i == #self.items) then
-            newItem = item
-        end
-    end
-
-    return newItem
-end
-
---- Add an image item to the menu
----@param text
----@return ImageItem
-function Menu:AddImageItem(text)
-    table.insert(self.items, text)
-
-    DatabindingClearBindingArray(self.listItems)
-
-    local newItem = nil
-    for i=1, #self.items do
-        local item = ImageItem(self.listItems, i)
-            :SetText(self.items[i])
-
-        if (i == #self.items) then
-            newItem = item
-        end
-    end
-
-    return newItem
+    return item
 end
 
 --- Remove an item from the menu
 ---@param entryId
 ---@return self
-function Menu:RemoveItem(entryId)
-    table.remove(self.items, index)
-
-    DatabindingRemoveBindingArrayItemByDataContextId(self.listItems, entryId)
+function Menu:RemoveItem(item)
+    for k, v in pairs(self.items) do
+        if (v.data == item.data) then
+            table.remove(self.items, k)
+            DatabindingRemoveBindingArrayItemByDataContextId(self.listItems, v.data)
+            break
+        end
+    end
 
     return self
 end
@@ -121,24 +135,39 @@ end
 ---@param index
 ---@return entryId
 function Menu:GetItem(index)
+    return self.items[index]
+end
+
+--- Get an item entry id by index
+---@param index
+---@return entryId
+function Menu:GetItemEntryId(index)
     return DatabindingGetItemContextByIndex(self.listItems, index)
 end
 
 --- Get all items
 ---@return entriesId
 function Menu:GetItems()
-    local entriesId = {}
+    --[[local entriesId = {}
     for i=1, #self.items do
         table.insert(entriesId, DatabindingGetItemContextByIndex(self.listItems, i))
     end
 
-    return entriesId
+    return entriesId]]
+    return self.items
 end
 
 --- Open the menu
 ---@return self
 function Menu:Open()
     CloseAllUiapps()
+
+    DatabindingClearBindingArray(self.listItems)
+
+    for _, item in ipairs(self.items) do
+        item:init()
+    end
+
     LaunchUiappByHashWithEntry(joaat("PLAYER_MENU"), -464479041)
 
     return self
