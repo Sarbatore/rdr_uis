@@ -19,15 +19,23 @@ Support: https://discord.gg/fxttPtFD66
 * Open
 * Close
 * SetHeader
+* SetSubheader
 * SetFooter
 * SetFooterColor
 * AddItem
 * RemoveItem
 * GetItem
+* GetItemEntryId
 * GetItems
 
 ### Menu Item
 * SetText
+* SetTextColor
 * SetEnabled
 * SetVisible
-* SetTextColor
+* OnFocused
+* OnSelected
+
+### Menu Image Item
+* SetImgTextureDict
+* SetImgTexture

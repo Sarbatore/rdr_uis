@@ -160,8 +160,6 @@ end
 --- Open the menu
 ---@return self
 function Menu:Open()
-    CloseAllUiapps()
-
     DatabindingClearBindingArray(self.listItems)
 
     for _, item in ipairs(self.items) do

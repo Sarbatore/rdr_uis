@@ -12,3 +12,7 @@ client_scripts {
 
   "example.lua",
 }
+
+escrow_ignore {
+  "example.lua",
+}
