@@ -133,7 +133,7 @@ end
 
 --- Get an item by index
 ---@param index
----@return entryId
+---@return Item
 function Menu:GetItem(index)
     return self.items[index]
 end
@@ -146,15 +146,20 @@ function Menu:GetItemEntryId(index)
 end
 
 --- Get all items
----@return entriesId
+---@return Items
 function Menu:GetItems()
-    --[[local entriesId = {}
+    return self.items
+end
+
+-- Get all items entry id
+---@return entriesId
+function Menu:GetItemsEntryId()
+    local entriesId = {}
     for i=1, #self.items do
-        table.insert(entriesId, DatabindingGetItemContextByIndex(self.listItems, i))
+        table.insert(entriesId, self.items[i].data)
     end
 
-    return entriesId]]
-    return self.items
+    return entriesId
 end
 
 --- Open the menu
