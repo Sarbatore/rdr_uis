@@ -7,10 +7,13 @@ setmetatable(Item, {
     end
 })
 
-function Item._construct(list, index, type)
+--- Create a new item
+---@param index number
+---@param type string
+---@return Item
+function Item._construct(index, type)
     local self = setmetatable({}, Item)
 
-    self.list = list
     self.index = index
     self.type = type
     self.text = ""
@@ -23,7 +26,10 @@ function Item._construct(list, index, type)
     return self
 end
 
-function Item:init()
+-- Init the item
+---@param list hash
+function Item:init(list)
+    self.list = list
     self.data = DatabindingAddDataContainer(self.list, "listItemData" .. tostring(self.index))
     DatabindingAddDataHash(self.data, "dynamic_list_item_event_channel_hash", `PLAYER_MENU`)
 
@@ -42,14 +48,14 @@ function Item:init()
 end
 
 --- Set the item focused callback
----@param cb function
+---@param callback function
 ---@return Item
-function Item:OnFocused(cb)
-    if (cb) then
-        self.onFocused = cb
+function Item:OnFocused(callback)
+    if (callback) then
+        self.onFocused = callback
     end
 
-    if (not cb and self.onFocused) then
+    if (not callback and self.onFocused) then
         self.onFocused()
     end
 
@@ -59,12 +65,12 @@ end
 --- Set the item selected callback
 ---@param callback function
 ---@return Item
-function Item:OnSelected(cb)
-    if (cb) then
-        self.onSelected = cb
+function Item:OnSelected(callback)
+    if (callback) then
+        self.onSelected = callback
     end
 
-    if (not cb and self.onSelected) then
+    if (not callback and self.onSelected) then
         self.onSelected()
     end
 
@@ -84,10 +90,10 @@ function Item:SetText(text)
 end
 
 --- Set the item text color
----@param colorHash number
+---@param color hash
 ---@return Item
-function Item:SetTextColor(colorHash)
-    self.textColor = colorHash
+function Item:SetTextColor(color)
+    self.textColor = color
     if (self.data) then 
         DatabindingAddDataHash(self.data, "dynamic_list_item_main_color", self.textColor)
     end
@@ -96,10 +102,10 @@ function Item:SetTextColor(colorHash)
 end
 
 --- Set the item enabled or not
----@param bool boolean
+---@param enabled boolean
 ---@return Item
-function Item:SetEnabled(bool)
-    self.enabled = bool
+function Item:SetEnabled(enabled)
+    self.enabled = enabled
     if (self.data) then 
         DatabindingAddDataBool(self.data, "dynamic_list_item_enabled", self.enabled)
     end
@@ -108,10 +114,10 @@ function Item:SetEnabled(bool)
 end
 
 --- Set the item visible or not
----@param bool boolean
+---@param visible boolean
 ---@return Item
-function Item:SetVisible(bool)
-    self.visible = bool
+function Item:SetVisible(visible)
+    self.visible = visible
     if (self.data) then 
         DatabindingAddDataBool(self.data, "dynamic_list_item_visible", self.visible)
     end
