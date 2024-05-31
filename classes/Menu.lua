@@ -95,10 +95,48 @@ end
 ---@param imgTexture hash
 ---@return Item
 function Menu:AddImageItem(text, imgDict, imgTexture)
-    local item = Item(#self.items+1, "image")
+    local item = Item(#self.items+1, "imageItem")
         :SetText(text)
         :SetImgTextureDict(imgDict)
         :SetImgTexture(imgTexture)
+
+    table.insert(self.items, item)
+
+    return item
+end
+
+--- Add an image to the menu
+---@param imgDict hash
+---@param imgTexture hash
+---@return Item
+function Menu:AddImage(imgDict, imgTexture)
+    local item = Item(#self.items+1, "image")
+        :SetImgTextureDict(imgDict)
+        :SetImgTexture(imgTexture)
+
+    table.insert(self.items, item)
+
+    return item
+end
+
+--- Add a small image item to the menu
+---@param text string
+---@param imgDict hash
+---@param imgTexture hash
+function Menu:AddSmallImageItem(text, imgDict, imgTexture)
+    local item = Item(#self.items+1, "smallImageItem")
+        :SetText(text)
+        :SetImgTextureDict(imgDict)
+        :SetImgTexture(imgTexture)
+
+    table.insert(self.items, item)
+
+    return item
+end
+
+function Menu:AddSlider(text)
+    local item = Item(#self.items+1, "slider")
+        :SetText(text)
 
     table.insert(self.items, item)
 

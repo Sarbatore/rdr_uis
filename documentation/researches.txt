@@ -4,16 +4,18 @@
 DatabindingAddDataBool(self.data, "dynamic_list_item_enabled", true) -- 0
 DatabindingAddDataBool(self.data, "dynamic_list_item_visible", true) -- 1
 DatabindingAddDataHash(self.data, "dynamic_list_item_main_color", joaat("COLOR_RED")) -- 2
+DatabindingAddDataHash(self.data, "dynamic_list_item_secondary_color", hash) -- 3
+DatabindingAddDataHash(self.data, "dynamic_list_item_tertiary_color", hash) -- 4
 DatabindingAddDataHash(self.data, "dynamic_list_item_main_img_texture_dic", hash) -- 5
 DatabindingAddDataHash(self.data, "dynamic_list_item_main_img_texture", hash) -- 6
+DatabindingAddDataBool(self.data, "dynamic_list_item_main_img_visible", true) -- 7
 DatabindingAddDataString(self.data, "dynamic_list_item_raw_text_entry", "My text") -- 15
+DatabindingAddDataString(self.data, "dynamic_list_item_secondary_raw_text_entry", text) -- 17
+DatabindingAddDataHash(self.data, "dynamic_list_item_event_channel_hash", hash) -- 54
 
 ------------------------------------------------------------------
 -- THESE HAVE NOT BEEN IMPLEMENTED, need to search how it works --
 ------------------------------------------------------------------
-DatabindingAddDataHash(self.data, "dynamic_list_item_secondary_color", hash) -- 3
-DatabindingAddDataHash(self.data, "dynamic_list_item_tertiary_color", hash) -- 4
-DatabindingAddDataBool(self.data, "dynamic_list_item_main_img_visible", true) -- 7
 DatabindingAddDataBool(self.data, "dynamic_list_item_main_img_enabled", true) -- 8
 DatabindingAddDataHash(self.data, "dynamic_list_item_status_icon_texture_dic", hash) -- 9
 DatabindingAddDataHash(self.data, "dynamic_list_item_status_icon_texture", hash) -- 10
@@ -22,7 +24,6 @@ DatabindingAddDataHash(self.data, "dynamic_list_item_deco_texture_dic", hash) --
 DatabindingAddDataHash(self.data, "dynamic_list_item_deco__texture", hash) -- 13
 DatabindingAddDataBool(self.data, "dynamic_list_item_deco_visible", true) -- 14
 DatabindingAddDataString(self.data, "dynamic_list_item_text_label_entry", "") -- 16
-DatabindingAddDataString(self.data, "dynamic_list_item_secondary_raw_text_entry", text) -- 17
 DatabindingAddDataString(self.data, "dynamic_list_item_secondary_text_label_entry", "") -- 18
 DatabindingAddDataBool(self.data, "dynamic_list_item_secondary_text_visible", true) -- 19
 DatabindingAddDataBool(self.data, "dynamic_list_item_secondary_text_enabled", true) -- 20
@@ -35,8 +36,8 @@ DatabindingAddDataBool(self.data, "dynamic_list_item_corner_end_img_visible", tr
 DatabindingAddDataInt(self.data, "dynamic_list_item_entry_player_index", 0) -- 27
 DatabindingAddDataInt(self.data, "dynamic_list_item_entry_friend_index", 0) -- 28
 Citizen.InvokeNative(0x294AF5323F44B053, self.data, "dynamic_list_item_player_gamer_handle", VALUETYPETOFIND) -- 29
-DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_visible", VALUETYPETOFIND) -- 30
-DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_text_enabled", VALUETYPETOFIND) -- 31
+DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_visible", true) -- 30
+DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_text_enabled", true) -- 31
 DatabindingAddHashArray(self.data, "dynamic_list_item_option_stepper_items") -- 32   Citizen.InvokeNative(0xF47E33F8D2523825, ArrayEntry, int)
 DatabindingAddStringArray(self.data, "dynamic_list_item_option_stepper_items") -- 32 (2 possibility)
 DatabindingAddDataHash(self.data, "dynamic_list_item_option_stepper_current_hash", VALUETYPETOFIND) -- 33
@@ -55,12 +56,11 @@ DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_text_field_entry_two
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_text_field_entry_three_visibility", VALUETYPETOFIND) -- 46
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_img_texture_one_dic", VALUETYPETOFIND) -- 47
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_img_one_texture", VALUETYPETOFIND) -- 48
-DatabindingAddDataBool(self.data, "dynamic_list_item_extra_img_one_visible", VALUETYPETOFIND) -- 49
+DatabindingAddDataBool(self.data, "dynamic_list_item_extra_img_one_visible", true) -- 49
 DatabindingAddDataInt(self.data, "dynamic_list_item_extra_int_field_one_value", VALUETYPETOFIND) -- 50
 DatabindingAddDataInt(self.data, "dynamic_list_item_extra_int_field_two_value", VALUETYPETOFIND) -- 51
 DatabindingAddDataXXXXX(self.data, "dynamic_list_item_extra_bool_field_one_value", VALUETYPETOFIND) -- 52
 DatabindingAddDataHash(self.data, "dynamic_list_item_link", hash) -- 53
-DatabindingAddDataHash(self.data, "dynamic_list_item_event_channel_hash", hash) -- 54
 DatabindingAddDataHash(self.data, "dynamic_list_item_focus_hash", hash) -- 55
 DatabindingAddDataHash(self.data, "dynamic_list_item_select_hash", hash) -- 56 sometimes the hash is -1292785935
 DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_text", hash) -- 57
@@ -70,22 +70,22 @@ DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_text", hash) 
 DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_enabled", true) -- 61
 DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_option_visible", true) -- 62
 DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_option_select_hash", hash) -- 63
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_toggle_text", VALUETYPETOFIND) -- 64
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_toggle_enabled", VALUETYPETOFIND) -- 65
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_toggle_visible", VALUETYPETOFIND) -- 66
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_toggle_select_hash", VALUETYPETOFIND) -- 67
-DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_r3_text", VALUETYPETOFIND) -- 68
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_r3_enabled", VALUETYPETOFIND) -- 69
-DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_r3_visible", VALUETYPETOFIND) -- 70
-DatabindingAddDataHash(self.data, "dynamic_list_item_select_r3_select_hash", VALUETYPETOFIND) -- 71
-DatabindingAddDataHash(self.data, "mount_collection_index", VALUETYPETOFIND) -- 72
-DatabindingAddDataBool(self.data, "dynamic_list_item_rename_prompt_enabled", VALUETYPETOFIND) -- 73
-DatabindingAddDataBool(self.data, "dynamic_list_item_rename_prompt_visible", VALUETYPETOFIND) -- 74
-DatabindingAddDataHash(self.data, "dynamic_list_item_stats_info_toggle_prompt_text", VALUETYPETOFIND) -- 75
-DatabindingAddDataHash(self.data, "invite_unique_id", VALUETYPETOFIND) -- 76
-DatabindingAddDataBool(self.data, "invite_tracked", VALUETYPETOFIND) -- 77
-DatabindingAddDataBool(self.data, "invite_processed", VALUETYPETOFIND) -- 78
-DatabindingAddDataHash(self.data, "invite_script_type", VALUETYPETOFIND) -- 79
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_toggle_text", hash) -- 64
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_toggle_enabled", true) -- 65
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_toggle_visible", true) -- 66
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_toggle_select_hash", hash) -- 67
+DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_r3_text", hash) -- 68
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_r3_enabled", true) -- 69
+DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_r3_visible", true) -- 70
+DatabindingAddDataHash(self.data, "dynamic_list_item_select_r3_select_hash", hash) -- 71
+DatabindingAddDataHash(self.data, "mount_collection_index", hash) -- 72
+DatabindingAddDataBool(self.data, "dynamic_list_item_rename_prompt_enabled", true) -- 73
+DatabindingAddDataBool(self.data, "dynamic_list_item_rename_prompt_visible", true) -- 74
+DatabindingAddDataHash(self.data, "dynamic_list_item_stats_info_toggle_prompt_text", hash) -- 75
+DatabindingAddDataHash(self.data, "invite_unique_id", hash) -- 76
+DatabindingAddDataBool(self.data, "invite_tracked", true) -- 77
+DatabindingAddDataBool(self.data, "invite_processed", true) -- 78
+DatabindingAddDataHash(self.data, "invite_script_type", hash) -- 79
 DatabindingAddDataXXXXX(self.data, "invite_gang_id", VALUETYPETOFIND) -- 80
 DatabindingAddDataXXXXX(self.data, "invite_expiration_time", VALUETYPETOFIND) -- 81
 DatabindingAddDataXXXXX(self.data, "invite_filter_type", VALUETYPETOFIND) -- 82
@@ -94,14 +94,14 @@ DatabindingAddDataXXXXX(self.data, "invite_feed_message_id", VALUETYPETOFIND) --
 -----------------------------
 --      AVAILABLE ITEMS    --
 -----------------------------
-pm_dynamic_text_item -- DONE
+pm_dynamic_text_item -- item
 pm_dynamic_text_and_end_image
 pm_dynamic_text_and_end_image_hold
 pm_dynamic_text_and_end_image_and_corner_end_image
-pm_dynamic_large_image_and_stacked_text -- DONE
+pm_dynamic_large_image_and_stacked_text -- imageItem
 pm_dynamic_large_image_and_stacked_text_with_fill
-pm_dynamic_posse_entry
+pm_dynamic_posse_entry -- smallImageItem
 pm_dynamic_player_entry
 pm_dynamic_horse_list_item
 pm_dynamic_vehicle_list_item
-pm_dynamic_small_image
+pm_dynamic_small_image -- image
