@@ -23,8 +23,38 @@ function Menu._construct(header)
     self.footer = ""
     self.footerColor = joaat("COLOR_WHITE")
     self.isOpened = false
+    self.onOpened = nil
+    self.onClosed = nil
     
     self.items = {}
+
+    return self
+end
+
+--- Set the menu opened callback
+---@param callback function
+---@return Menu
+function Menu:OnOpened(callback)
+    if (callback ~= nil) then self.onOpened = callback end
+
+    if (not callback and self.onOpened) then
+        self.isOpened = true
+        self.onOpened()
+    end
+
+    return self
+end
+
+--- Set the menu closed callback
+---@param callback function
+---@return Menu
+function Menu:OnClosed(callback)
+    if (callback ~= nil) then self.onClosed = callback end
+
+    if (not callback and self.onClosed) then
+        self.isOpened = false
+        self.onClosed()
+    end
 
     return self
 end
@@ -33,9 +63,11 @@ end
 ---@param text string
 ---@return Menu
 function Menu:SetHeader(text)
-    self.header = text
+    if (text ~= nil) then self.header = text end
+
     if (self.isOpened) then
-        DatabindingAddDataString(menuData, "header_text", text)
+        print("Setting header text", self.header)
+        DatabindingAddDataString(menuData, "header_text", self.header)
     end
 
     return self
@@ -45,9 +77,10 @@ end
 ---@param text string
 ---@return Menu
 function Menu:SetSubheader(text)
-    self.subheader = text
+    if (text ~= nil) then self.subheader = text end
+
     if (self.isOpened) then
-        AddTextEntryByHash(-179955176, text)
+        AddTextEntryByHash(-179955176, self.subheader)
     end
 
     return self
@@ -57,9 +90,10 @@ end
 ---@param text string
 ---@return Menu
 function Menu:SetFooter(text)
-    self.footer = text
+    if (text ~= nil) then self.footer = text end
+
     if (self.isOpened) then
-        DatabindingAddDataString(menuData, "footer_tooltip_text", text)
+        DatabindingAddDataString(menuData, "footer_tooltip_text", self.footer)
     end
 
     return self
@@ -69,9 +103,10 @@ end
 ---@param color hash
 ---@return Menu
 function Menu:SetFooterColor(color)
-    self.footerColor = color
+    if (color ~= nil) then self.footerColor = color end
+
     if (self.isOpened) then
-        DatabindingAddDataHash(menuData, "footer_tooltip_color", color)
+        DatabindingAddDataHash(menuData, "footer_tooltip_color", self.footerColor)
     end
 
     return self
@@ -192,18 +227,16 @@ end
 --- Open the menu
 ---@return Menu
 function Menu:Open()
-    if (currentMenu) then
-        currentMenu.isOpened = false
-    end
     currentMenu = self
 
     self.isOpened = true
     DatabindingClearBindingArray(itemsList)
 
-    self:SetHeader(self.header)
-    self:SetSubheader(self.subheader)
-    self:SetFooter(self.footer)
-    self:SetFooterColor(self.footerColor)
+    -- Init menu
+    self:SetHeader()
+    self:SetSubheader()
+    self:SetFooter()
+    self:SetFooterColor()
 
     for _, item in ipairs(self.items) do
         item:init(itemsList)
@@ -212,7 +245,7 @@ function Menu:Open()
     LaunchUiappByHashWithEntry(joaat("PLAYER_MENU"), -464479041)
 
     Citizen.CreateThread(function()
-        while IsUiappRunningByHash(joaat("PLAYER_MENU")) == 1 do
+        while IsUiappRunningByHash(joaat("PLAYER_MENU")) == 1 and (not currentMenu or currentMenu == self) do
             while EventsUiIsPending(joaat("PLAYER_MENU")) do
                 local msg = DataView.ArrayBuffer(8 * 4)
                 msg:SetInt32(0, 0) -- Event type
@@ -221,6 +254,16 @@ function Menu:Open()
                 msg:SetInt32(24, 0) -- Item data container
     
                 if (Citizen.InvokeNative(0x90237103F27F7937, joaat("PLAYER_MENU"), msg:Buffer()) ~= 0) then -- EVENTS_UI_PEEK_MESSAGE
+                    -- Item unfocused
+                    if (msg:GetInt32(0) == `ITEM_UNFOCUSED`) then
+                        for k, v in ipairs(currentMenu.items) do
+                            if (msg:GetInt32(24) == v.data) then
+                                v:OnUnfocused()
+                                break
+                            end
+                        end
+                    end
+
                     -- Item focused
                     if msg:GetInt32(0) == `ITEM_FOCUSED` then
                         for k, v in ipairs(currentMenu.items) do
@@ -235,7 +278,6 @@ function Menu:Open()
                     if msg:GetInt32(0) == `ITEM_SELECTED` then
                         for k, v in ipairs(currentMenu.items) do
                             if (msg:GetInt32(24) == v.data) then
-                                -- Check if the item is enabled
                                 if (DatabindingReadDataBool(v.data, "dynamic_list_item_enabled")) then
                                     v:OnSelected()
                                 end
@@ -243,18 +285,16 @@ function Menu:Open()
                             end
                         end
                     end
-
-                    -- Menu closed
-                    if (msg:GetInt32(0) == -1203660660) then
-                        
-                    end
                 end
     
                 EventsUiPopMessage(joaat("PLAYER_MENU"))
             end
             Citizen.Wait(0)
         end
+        self:OnClosed()
     end)
+
+    self:OnOpened()
 
     return self
 end

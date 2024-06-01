@@ -21,6 +21,7 @@ function Item._construct(index, type)
     self.enabled = true
     self.visible = true
     self.onFocused = nil
+    self.onUnfocused = nil
     self.onSelected = nil
 
     -- Image item
@@ -75,12 +76,12 @@ function Item:init(list)
         DatabindingInsertUiItemToListFromContextStringAlias(self.list, self.index, self.type, self.data)
     end
 
+    -- Init item
     self:SetText()
     self:SetTextColor()
     self:SetEnabled()
     self:SetVisible()
 
-    -- Image item
     self:SetSubtext()
     self:SetSubtextColor()
 
@@ -88,7 +89,6 @@ function Item:init(list)
     self:SetImgTexture()
     self:SetImgColor()
 
-    -- Small image item
     self:SetImgVisible()
 end
 
@@ -100,6 +100,19 @@ function Item:OnFocused(callback)
 
     if (not callback and self.onFocused) then
         self.onFocused()
+    end
+
+    return self
+end
+
+--- Set the item unfocused callback
+---@param callback function
+---@return Item
+function Item:OnUnfocused(callback)
+    if (callback ~= nil) then self.onUnfocused = callback end
+
+    if (not callback and self.onUnfocused) then
+        self.onUnfocused()
     end
 
     return self
