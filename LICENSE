@@ -1,27 +1,21 @@
-This Personal Use License Agreement ("Agreement") is a legal agreement between you ("Licensee") and Sarbatore ("Licensor") for the use of the provided code ("Software"). By using the Software, you agree to be bound by the terms and conditions of this Agreement.
+MIT License
 
-1. Grant of License
-Licensor grants Licensee a personal, non-transferable, non-exclusive license to use the Software solely for personal, non-commercial purposes.
+Copyright (c) 2024 Valentin CHENE
 
-2. Restrictions
-Licensee shall not:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Sell, distribute, or otherwise commercialize the Software or any derivative works thereof.
-Incorporate the Software into any scripts, applications, or other products that are intended for sale or commercial distribution.
-Remove or alter any copyright notices or other proprietary labels on the Software.
-3. Ownership
-Licensor retains all rights, title, and interest in and to the Software, including all intellectual property rights.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-4. Disclaimer of Warranties
-The Software is provided "as is" without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall Licensor be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
-
-5. Limitation of Liability
-To the maximum extent permitted by applicable law, in no event shall Licensor be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, business interruption, loss of information, or any other pecuniary loss) arising out of the use of or inability to use the Software, even if Licensor has been advised of the possibility of such damages.
-
-6. Termination
-This Agreement is effective until terminated. Licensee may terminate it at any time by destroying all copies of the Software in their possession. This Agreement will also terminate immediately if Licensee fails to comply with any term or condition of this Agreement. Upon such termination, Licensee agrees to destroy all copies of the Software.
-
-7. Governing Law
-This Agreement shall be governed by and construed in accordance with the laws of [Your Country/State], without regard to its conflict of law principles.
-
-By using the Software, you acknowledge that you have read this Agreement, understand it, and agree to be bound by its terms and conditions.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
