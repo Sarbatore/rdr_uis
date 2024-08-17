@@ -1,0 +1,83 @@
+local container = DatabindingAddDataContainerFromPath("", "Satchel")
+DatabindingAddDataBool(container, "FolderEmpty", false)
+
+LIB.SATCHEL = {}
+exports("SATCHEL", function()
+    return LIB.SATCHEL
+end)
+
+LIB.SATCHEL.Open = function()
+    LaunchUiappByHashWithEntry(`satchel`, `INGAME`)
+
+    Citizen.CreateThread(function()
+        while IsUiappRunningByHash(`satchel`) == 1 do
+            while EventsUiIsPending(`satchel`) do
+                local msg = DataView.ArrayBuffer(8 * 4)
+                msg:SetInt32(0, 0)
+                msg:SetInt32(8, 0)
+                msg:SetInt32(16, 0)
+                msg:SetInt32(24, 0) -- item data container
+
+                if (Citizen.InvokeNative(0x90237103F27F7937, `satchel`, msg:Buffer()) ~= 0) then -- EVENTS_UI_PEEK_MESSAGE
+
+                    if msg:GetInt32(0) == `ITEM_FOCUSED` then
+                        TriggerEvent("satchel:ItemFocused", msg:GetInt32(24))
+                    end
+
+                    if msg:GetInt32(0) == `ITEM_SELECTED` then
+                        TriggerEvent("satchel:ItemSelected", msg:GetInt32(24))
+                    end
+
+                    if msg:GetInt32(16) == `SATCHEL_UI_EVENT_EXIT` then
+                        TriggerEvent("satchel:Exit")
+                    end
+
+                    if msg:GetInt32(16) == `SATCHEL_UI_EVENT_FILTER` then
+                        TriggerEvent("satchel:Filter", msg:GetInt32(24))
+                    end
+                end
+
+                EventsUiPopMessage(`satchel`)
+            end
+
+            Citizen.Wait(0)
+        end
+    end)
+end
+
+local SATCHEL = exports.rdr_menu:SATCHEL()
+SATCHEL.Open()
+
+function OpenSatchel()
+    local selectedData = DatabindingAddDataContainer(satchelData, "Selected")
+    DatabindingAddDataHash(selectedData, "Name", 0)
+    DatabindingAddDataHash(selectedData, "Category", 0)
+    DatabindingAddDataInt(selectedData, "DefaultCategoryIndex", 0)
+    DatabindingAddDataInt(selectedData, "CategoryIndex", 0)
+    DatabindingAddDataInt(selectedData, "CategoryCount", 0) -- enables category switch if > 1
+    DatabindingAddDataString(selectedData, "IndexDescription", "[1 of ???]")
+    DatabindingAddDataString(selectedData, "Tip", "[tip]")
+    N_0x9d21b185abc2dbc4(selectedData, "effects", 0, 0)
+    DatabindingAddDataHash(selectedData, "Folder", 0)
+
+    -- Exists before we make it??
+    local satchelCategoryItemsData = DatabindingGetDataContainerFromPath("satchel_category_items")
+    local satchelMenuItemsData = DatabindingGetDataContainerFromPath("satchel_menu_items")
+    local satchelListItemsData = DatabindingGetDataContainerFromPath("satchel_list_items")
+    
+
+    DatabindingSetTemplatedUiItemListSize(satchelListItemsData, 3)
+    DatabindingSetTemplatedUiItemListSize(satchelMenuItemsData, 3)
+
+
+    local collectionsList = DatabindingAddUiItemList(satchelData, "Collections")
+
+    local playerDat = DatabindingAddDataContainer(collectionsList, "player")
+    DatabindingAddDataHash(playerDat, "label", `SATCHEL_TITLE`)
+    DatabindingInsertUiItemToListFromContextHashAlias(collectionsList, -1, -1287062382, playerDat)
+
+
+    local menuList = DatabindingAddUiItemList(satchelMenuItemsData, "List")
+    local item = DatabindingAddDataContainer(satchelData, "fooba2r")
+    DatabindingInsertUiItemToListFromContextStringAlias(menuList, -1, "ft_dynamic_text_and_price", item)
+end

@@ -54,26 +54,32 @@ function Item:init(list)
     elseif (self.type == "smallImageItem") then
         DatabindingInsertUiItemToListFromContextStringAlias(self.list, self.index, "pm_dynamic_posse_entry", self.data)
     elseif (self.type == "slider") then
-        --[[local container = DatabindingAddDataContainerFromPath("", "lobby_game_options")
-        DatabindingAddDataString(container, "dynamic_list_item_raw_text_entry", "My text") -- 15
+        --[[DatabindingAddDataHash(self.data, "dynamic_list_item_option_stepper_index_change_ui_event_hash", `PLAYER_MENU`)
 
-        local ah = DatabindingAddHashArray(container, "dynamic_list_item_option_stepper_items")
-        local as = DatabindingAddStringArray(container, "dynamic_list_item_option_stepper_items")
+        --DatabindingInsertUiItemToListFromContextStringAlias(self.list, self.index, "pm_dynamic_text_item", self.data)
 
-        DatabindingAddDataBool(container, "dynamic_list_item_option_stepper_visible", true)
-        DatabindingAddDataBool(container, "dynamic_list_item_option_stepper_text_enabled", true)
-        --DatabindingAddDataHash(container, "dynamic_list_item_option_stepper_current_hash", 0) -- 33
-        DatabindingAddDataInt(container, "dynamic_list_item_option_stepper_current_index", 1)
-        DatabindingAddDataInt(container, "dynamic_list_item_option_stepper_max_index", 10) 
-        DatabindingAddDataBool(container, "dynamic_list_item_left_chevron_enabled", true)
-        DatabindingAddDataBool(container, "dynamic_list_item_right_chevron_enabled", true)
+        DatabindingAddDataBool(self.data, "dynamic_list_item_enabled", true)
+        DatabindingAddDataBool(self.data, "dynamic_list_item_visible", true)
+        DatabindingAddDataHash(self.data, "dynamic_list_item_main_color", joaat("COLOR_WHITE"))
+        --DatabindingAddDataHash(self.data, "dynamic_list_item_link", Param10.f_3)
+        --DatabindingAddDataHash(self.data, func_2034(54), Param10.f_4)
+        --DatabindingAddDataHash(self.data, "dynamic_list_item_select_hash", Param10.f_5)
+        --DatabindingAddDataHash(self.data, "dynamic_list_item_focus_hash", Param10.f_6)
+        DatabindingAddDataHash(self.data, "dynamic_list_item_prompt_text", joaat("IB_SELECT"))
+        --DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_enabled", Param10.f_8)
+        --DatabindingAddDataBool(self.data, "dynamic_list_item_prompt_visible", Param10.f_9)
+
+        DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_visible", true)
+        DatabindingAddDataBool(self.data, "dynamic_list_item_option_stepper_text_enabled", true)
+        --DatabindingAddDataHash(self.data, "dynamic_list_item_option_stepper_current_hash", 0) -- 33
+        DatabindingAddDataInt(self.data, "dynamic_list_item_option_stepper_current_index", 1)
+        DatabindingAddDataInt(self.data, "dynamic_list_item_option_stepper_max_index", 10) 
+        DatabindingAddDataBool(self.data, "dynamic_list_item_left_chevron_enabled", true)
+        DatabindingAddDataBool(self.data, "dynamic_list_item_right_chevron_enabled", true)
+
+        local ah = DatabindingAddHashArray(self.data, "dynamic_list_item_option_stepper_items")
+        local as = DatabindingAddStringArray(self.data, "dynamic_list_item_option_stepper_items")]]
         
-
-        DatabindingAddDataHash(container, "dynamic_list_item_select_hash", 0)]]
-    end
-
-    if (self.type ~= nil and self.type ~= "image") then
-        DatabindingInsertUiItemToListFromContextStringAlias(self.list, self.index, self.type, self.data)
     end
 
     -- Init item

@@ -1,0 +1,113 @@
+LIB.CentralInfo = function(from, to, cb)
+    local centralInfoContainer = DatabindingAddDataContainerFromPath("", "centralInfoDatastore")
+    local timerData = DatabindingAddDataString(centralInfoContainer, "timerString", duration)
+    local isVisibleData = DatabindingAddDataBool(centralInfoContainer, "isVisible", true)
+
+    --[[local scoreContainer = DatabindingAddDataContainer(centralInfoContainer, "score")
+    local leftScoreData = DatabindingAddDataString(scoreContainer, "leftScore", text)
+    local leftScoreVisibleData = DatabindingAddDataBool(scoreContainer, "leftScoreVisible", true)
+    local rightScoreData = DatabindingAddDataString(scoreContainer, "rightScore", text)
+    local rightScoreVisibleData = DatabindingAddDataBool(scoreContainer, "rightScoreVisible", true)]]
+
+    local step = from > to and -1 or 1
+    for remainingTime = from, to, step do
+        DatabindingWriteDataString(timerData, remainingTime)
+        cb(remainingTime)
+
+        Citizen.Wait(1000)
+    end
+
+    if (UiStateMachineExists(1546991729)) then
+        UiStateMachineDestroy(1546991729)
+    end
+
+    if DatabindingIsEntryValid(centralInfoContainer) then
+        DatabindingRemoveDataEntry(centralInfoContainer)
+    end
+    if DatabindingIsEntryValid(timerData) then
+        DatabindingRemoveDataEntry(timerData)
+    end
+    if DatabindingIsEntryValid(isVisibleData) then
+        DatabindingRemoveDataEntry(isVisibleData)
+    end
+end
+exports("CentralInfo", LIB.CentralInfo)
+
+-- Example usage
+exports.rdr_menu:CentralInfo(1, 5, function(remainingTime)
+    print(remainingTime)
+end)
+
+
+
+--[[
+
+
+
+return "timerString";
+case 1:
+    return "isTimerLow";
+case 2:
+    return "leftScore"; -- String
+case 5:
+    return "leftScoreVisible"; -- bool
+case 3:
+    return "leftScoreColor"; -- hash
+case 4:
+    return "leftScoreTextColor"; -- hash
+case 8:
+    return "rightScore"; -- String
+case 11:
+    return "rightScoreVisible"; -- bool
+case 9:
+    return "rightScoreColor"; -- hash
+case 10:
+    return "rightScoreTextColor"; -- hash
+case 14:
+    return "visible";
+case 15:
+    return "enabled";
+case 16:
+    return "text";
+case 17:
+    return "meterValue";
+case 18:
+    return "meterColor";
+case 19:
+    return "meterVisible";
+case 20:
+    return "txn";
+case 21:
+    return "txd";
+case 22:
+    return "secondaryTxn";
+case 23:
+    return "secondaryTxd";
+case 24:
+    return "secondaryImgColor";
+case 25:
+    return "imgColor";
+case 26:
+    return "isIconBackgroundVisible";
+case 27:
+    return "iconEnabled";
+case 28:
+    return "overlayTxn";
+case 29:
+    return "overlayTxd";
+case 30:
+    return "overlayColor";
+case 31:
+    return "overlayVisible";
+case 32:
+    return "meterThirdsVisible";
+case 33:
+    return "showAlternateIcons";
+case 34:
+    return "showBlinkIcon";
+case 35:
+    return "showPulse";
+case 36:
+    return "countDownTimer";
+case 37:
+    return "isVisible";]]

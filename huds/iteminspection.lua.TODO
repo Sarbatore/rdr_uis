@@ -1,0 +1,175 @@
+local dynamicCatalogItemsContainer = DatabindingAddDataContainerFromPath("", "DynamicCatalogItems")
+local catalogItemInspectionContainer = DatabindingAddDataContainer(dynamicCatalogItemsContainer, "CatalogItemInspection")
+
+local isVisible = DatabindingAddDataBool(catalogItemInspectionContainer, "isVisible", false)
+local itemLabel = DatabindingAddDataHash(catalogItemInspectionContainer, "itemLabel", 0)
+local itemDescription = DatabindingAddDataString(catalogItemInspectionContainer, "itemDescription", "")
+local purchaseLabel = DatabindingAddDataString(catalogItemInspectionContainer, "purchaseLabel", "")
+local purchasePrice = DatabindingAddDataInt(catalogItemInspectionContainer, "purchasePrice", 0)
+local tokenPrice = DatabindingAddDataInt(catalogItemInspectionContainer, "tokenPrice", 0)
+local isGoldPrice = DatabindingAddDataBool(catalogItemInspectionContainer, "isGoldPrice", false)
+local purchaseModifiedPrice = DatabindingAddDataInt(catalogItemInspectionContainer, "purchaseModifiedPrice", 0)
+local modifiedPriceVisible = DatabindingAddDataBool(catalogItemInspectionContainer, "modifiedPriceVisible", false)
+local modifiedPriceGold = DatabindingAddDataBool(catalogItemInspectionContainer, "modifiedPriceGold", false)
+local ammoVisible = DatabindingAddDataBool(catalogItemInspectionContainer, "ammoVisible", false)
+local ammoCurrent = DatabindingAddDataInt(catalogItemInspectionContainer, "ammoCurrent", 0)
+local ammoMax = DatabindingAddDataInt(catalogItemInspectionContainer, "ammoMax", 0)
+local ammoTextureDictionary = DatabindingAddDataString(catalogItemInspectionContainer, "ammoTextureDictionary", "")
+local ammoTexture = DatabindingAddDataString(catalogItemInspectionContainer, "ammoTexture", "")
+local mailVisible = DatabindingAddDataBool(catalogItemInspectionContainer, "mailVisible", false)
+local mailCurrent = DatabindingAddDataInt(catalogItemInspectionContainer, "mailCurrent", 0)
+
+LIB.ITEMINSPECTION = {}
+exports("ITEMINSPECTION", function()
+    return LIB.ITEMINSPECTION
+end)
+
+LIB.ITEMINSPECTION.SetVisible = function(visible)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "isVisible", visible)
+    DatabindingWriteDataBool(isVisible, "isVisible", visible)
+end
+
+LIB.ITEMINSPECTION.SetItemLabel = function(itemLabel)
+    --DatabindingAddDataHash(catalogItemInspectionContainer, "itemLabel", joaat("WEAPON_PISTOL_VOLCANIC"))
+    DatabindingWriteDataHash(itemLabel, "itemLabel", itemLabel)
+end
+
+LIB.ITEMINSPECTION.SetItemDescription = function(itemDescription)
+    --DatabindingAddDataString(catalogItemInspectionContainer, "itemDescription", itemDescription)
+    DatabindingWriteDataString(itemDescription, "itemDescription", itemDescription)
+end
+
+LIB.ITEMINSPECTION.SetPurchaseLabel = function(purchaseLabel)
+    --DatabindingAddDataString(catalogItemInspectionContainer, "purchaseLabel", purchaseLabel)
+    DatabindingWriteDataString(purchaseLabel, "purchaseLabel", purchaseLabel)
+end
+
+LIB.ITEMINSPECTION.SetPurchasePrice = function(price)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "purchasePrice", price)
+    DatabindingWriteDataInt(purchaseModifiedPrice, "purchasePrice", price)
+end
+
+LIB.ITEMINSPECTION.SetTokenPrice = function(price)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "tokenPrice", price)
+    DatabindingWriteDataInt(tokenPrice, "tokenPrice", price)
+end
+
+LIB.ITEMINSPECTION.SetIsGoldPrice = function(isGold)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "isGoldPrice", isGold)
+    DatabindingWriteDataBool(isGoldPrice, "isGoldPrice", isGold)
+end
+
+LIB.ITEMINSPECTION.SetPurchaseModifiedPrice = function(price)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "purchaseModifiedPrice", price)
+    DatabindingWriteDataInt(purchaseModifiedPrice, "purchaseModifiedPrice", price)
+end
+
+LIB.ITEMINSPECTION.SetModifiedPriceVisible = function(visible)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "modifiedPriceVisible", visible)
+    DatabindingWriteDataBool(modifiedPriceVisible, "modifiedPriceVisible", visible)
+end
+
+LIB.ITEMINSPECTION.SetModifiedPriceGold = function(isGold)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "modifiedPriceGold", isGold)
+    DatabindingWriteDataBool(modifiedPriceGold, "modifiedPriceGold", isGold)
+end
+
+LIB.ITEMINSPECTION.SetAmmoVisible = function(visible)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "ammoVisible", visible)
+    DatabindingWriteDataBool(ammoVisible, "ammoVisible", visible)
+end
+
+LIB.ITEMINSPECTION.SetAmmoCurrent = function(current)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "ammoCurrent", current)
+    DatabindingWriteDataInt(ammoCurrent, "ammoCurrent", current)
+end
+
+LIB.ITEMINSPECTION.SetAmmoMax = function(max)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "ammoMax", max)
+    DatabindingWriteDataInt(ammoMax, "ammoMax", max)
+end
+
+LIB.ITEMINSPECTION.SetAmmoTexture = function(textureDictionary, texture)
+    --DatabindingAddDataString(catalogItemInspectionContainer, "ammoTextureDictionary", textureDictionary)
+    --DatabindingAddDataString(catalogItemInspectionContainer, "ammoTexture", texture)
+    DatabindingWriteDataString(ammoTextureDictionary, "ammoTextureDictionary", textureDictionary)
+    DatabindingWriteDataString(ammoTexture, "ammoTexture", texture)
+end
+
+LIB.ITEMINSPECTION.SetMailVisible = function(visible)
+    --DatabindingAddDataBool(catalogItemInspectionContainer, "mailVisible", visible)
+    DatabindingWriteDataBool(mailVisible, "mailVisible", visible)
+end
+
+LIB.ITEMINSPECTION.SetMails = function(amount)
+    --DatabindingAddDataInt(catalogItemInspectionContainer, "mailCurrent", amount)
+    DatabindingWriteDataInt(mailCurrent, "mailCurrent", amount)
+end
+
+LIB.ITEMINSPECTION.Show = function()
+    DatabindingRemoveDataEntry(dynamicCatalogItemsContainer)
+    DatabindingRemoveDataEntry(catalogItemInspectionContainer)
+    dynamicCatalogItemsContainer = DatabindingAddDataContainerFromPath("", "Translate")
+    catalogItemInspectionContainer = DatabindingAddDataContainer(dynamicCatalogItemsContainer, "Catalogue")
+
+    UiStateMachineDestroy(-1468895189)
+
+    local flowBlock = RequestFlowBlock(joaat("SHOP_BROWSING_MAIN_FLOW"))
+
+    while not UiflowblockIsLoaded(flowBlock) do
+        Wait(1)
+    end
+
+    UiflowblockEnter(flowBlock, -702860656)
+    UiStateMachineCreate(-1468895189, flowBlock)
+
+    print("launched")
+end
+
+LIB.ITEMINSPECTION.Hide = function()
+    UiStateMachineDestroy(-1468895189)
+end
+
+LIB.ITEMINSPECTION.Clear = function()
+    DataBindingWriteDataHash(itemLabel, "itemLabel", 0)
+    DataBindingWriteDataString(itemDescription, "itemDescription", "")
+    DataBindingWriteDataString(purchaseLabel, "purchaseLabel", "")
+    DataBindingWriteDataInt(purchasePrice, "purchasePrice", 0)
+    DataBindingWriteDataInt(tokenPrice, "tokenPrice", 0)
+    DataBindingWriteDataBool(isGoldPrice, "isGoldPrice", false)
+    DataBindingWriteDataInt(purchaseModifiedPrice, "purchaseModifiedPrice", 0)
+    DataBindingWriteDataBool(modifiedPriceVisible, "modifiedPriceVisible", false)
+    DataBindingWriteDataBool(modifiedPriceGold, "modifiedPriceGold", false)
+    DataBindingWriteDataBool(ammoVisible, "ammoVisible", false)
+    DataBindingWriteDataInt(ammoCurrent, "ammoCurrent", 0)
+    DataBindingWriteDataInt(ammoMax, "ammoMax", 0)
+    DataBindingWriteDataString(ammoTextureDictionary, "ammoTextureDictionary", "")
+    DataBindingWriteDataString(ammoTexture, "ammoTexture", "")
+    DataBindingWriteDataBool(mailVisible, "mailVisible", false)
+    DataBindingWriteDataInt(mailCurrent, "mailCurrent", 0)
+
+    print("Cleared")
+end
+
+print("here")
+
+LIB.ITEMINSPECTION.Clear()
+LIB.ITEMINSPECTION.Hide()
+LIB.ITEMINSPECTION.Show()
+
+LIB.ITEMINSPECTION.SetItemLabel("Volcanic Pistol")
+LIB.ITEMINSPECTION.SetItemDescription("A powerful, rapid-fire weapon that can be dual-wielded.")
+LIB.ITEMINSPECTION.SetPurchaseLabel("Purchase")
+LIB.ITEMINSPECTION.SetPurchasePrice(100)
+LIB.ITEMINSPECTION.SetTokenPrice(10)
+LIB.ITEMINSPECTION.SetIsGoldPrice(false)
+LIB.ITEMINSPECTION.SetPurchaseModifiedPrice(90)
+LIB.ITEMINSPECTION.SetModifiedPriceVisible(true)
+LIB.ITEMINSPECTION.SetModifiedPriceGold(false)
+LIB.ITEMINSPECTION.SetAmmoVisible(true)
+LIB.ITEMINSPECTION.SetAmmoCurrent(6)
+LIB.ITEMINSPECTION.SetAmmoMax(6)
+LIB.ITEMINSPECTION.SetAmmoTexture("shop_ammo", "ammo_pistol")
+LIB.ITEMINSPECTION.SetMailVisible(true)
+LIB.ITEMINSPECTION.SetMails(3)
+

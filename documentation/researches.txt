@@ -105,3 +105,85 @@ pm_dynamic_player_entry
 pm_dynamic_horse_list_item
 pm_dynamic_vehicle_list_item
 pm_dynamic_small_image -- image
+
+
+
+
+
+
+
+
+
+--[[
+coo = DatabindingAddDataContainerByHash(menuData, joaat("MOONSHINE_PROPERTY"))
+DatabindingAddDataHash(coo, -165442446, 0)
+DatabindingAddDataHash(coo, -1536030095, 0)]]
+
+RegisterCommand("testm", function(source, args)
+    local m = tonumber(args[1])
+
+    CloseAllUiapps()
+
+    
+    local itemsList = DatabindingAddUiItemList(DatabindingAddDataContainerFromPath("", "AnimalSightingMissions"), "listItems")
+    DatabindingClearBindingArray(itemsList)
+
+    if m == 1 then
+        LaunchUiappWithEntry("player_menu", "mp_moonshine_selection")
+    elseif m == 2 then
+        LaunchUiappWithEntry("player_menu", 518901366)
+    elseif m == 3 then
+        LaunchUiappWithEntry("player_menu", "sp")
+    elseif m == 4 then
+        LaunchUiappWithEntry("player_menu", "sp_notifications")
+    elseif m == 5 then
+        LaunchUiappWithEntry("player_menu", "sp_missions") -- Missions
+    elseif m == 6 then
+        LaunchUiappWithEntry("player_menu", "sp_post_office") -- Courriers
+    else
+        --LaunchUiappWithEntry("player_menu", "invalid")
+        --LaunchUiappByHashWithEntry(joaat("PLAYER_MENU"), -464479041)
+        --LaunchUiappByHashWithEntry(joaat("PLAYER_MENU"), 518901366)
+    end
+
+    print(joaat("PLAYER_MENU"))
+
+    local menuData = DatabindingAddDataContainerFromPath("", "player_menu_data")
+    DatabindingAddDataInt(menuData, "player_menu_root_filter_index", 3)
+
+    Global_1940311.f_1433.f_54.f_1 = DatabindingAddDataBool(menuData, "orbis_mode", false);
+    Global_1940311.f_1433.f_54.f_3 = DatabindingAddDataString(menuData, "header_text", "AAAAA");
+    Global_1940311.f_1433.f_54.f_4 = DatabindingAddDataString(menuData, "sub_header_text", "Syb");
+    Global_1940311.f_1433.f_54.f_5 = DatabindingAddDataString(menuData, "footer_tooltip_text", "");
+    Global_1940311.f_1433.f_54.f_6 = DatabindingAddDataHash(menuData, "footer_tooltip_color", joaat("COLOR_WHITE"));
+    Global_1940311.f_1433.f_54.f_64 = DatabindingAddDataString(menuData, "posse_title_name", "");
+    Global_1940311.f_1433.f_54.f_65 = DatabindingAddDataString(menuData, "camp_district_text", "");
+    Global_1940311.f_1433.f_54.f_66 = DatabindingAddDataString(menuData, "camp_size_text", "");
+    Global_1940311.f_1433.f_54.f_68 = DatabindingAddDataHash(menuData, "camp_image_texture", 2);
+    Global_1940311.f_1433.f_54.f_69 = DatabindingAddDataHash(menuData, "camp_image_texture_dictionary", 2);
+    Global_1940311.f_1433.f_54.f_70 = DatabindingAddDataString(menuData, "camp_location_desc", "");
+    Global_1940311.f_1433.f_54.f_67 = DatabindingAddDataInt(menuData, "camp_daily_fee", 0);
+    Global_1940311.f_1433.f_54.f_63 = DatabindingAddDataBool(menuData, "options_menu_visible", true);
+    Global_1940311.f_1433.f_54.f_78 = DatabindingAddDataBool(menuData, "player_menu_log_enabled", true);
+    Global_1940311.f_1433.f_54.f_79 = DatabindingAddDataBool(menuData, "player_menu_invite_players_enabled", true);
+    Global_1940311.f_1433.f_54.f_80 = DatabindingAddDataBool(menuData, "player_menu_invites_enabled", true);
+    Global_1940311.f_1433.f_54.f_81 = DatabindingAddDataBool(menuData, "player_menu_daily_challenges_enabled", true);
+    Global_1940311.f_1433.f_54.f_82 = DatabindingAddDataBool(menuData, "player_menu_daily_challenges_focused", false);
+    Global_1940311.f_1433.f_54.f_95 = DatabindingAddDataBool(menuData, "player_menu_invites_icon_visible", true);
+    Global_1940311.f_1433.f_54.f_83 = DatabindingAddDataBool(menuData, "player_menu_bounty_enabled", true);
+    Global_1940311.f_1433.f_54.f_84 = DatabindingAddDataBool(menuData, "player_menu_posse_enabled", true);
+    Global_1940311.f_1433.f_54.f_85 = DatabindingAddDataBool(menuData, "player_menu_camp_enabled", true);
+    Global_1940311.f_1433.f_54.f_86 = DatabindingAddDataBool(menuData, "player_menu_players_enabled", true);
+    Global_1940311.f_1433.f_54.f_87 = DatabindingAddDataBool(menuData, "player_menu_jobs_enabled", true);
+    Global_1940311.f_1433.f_54.f_88 = DatabindingAddDataBool(menuData, "player_menu_stables_enabled", true);
+    Global_1940311.f_1433.f_54.f_89 = DatabindingAddDataBool(menuData, "player_menu_options_enabled", true);
+    Global_1940311.f_1433.f_54.f_91 = DatabindingAddDataBool(menuData, "player_menu_quit_to_free_roam", true);
+    Global_1940311.f_1433.f_54.f_62 = DatabindingAddDataBool(menuData, "new_player_menu_options_available", false);
+    Global_1940311.f_1433.f_54.f_92 = DatabindingAddDataBool(menuData, "player_menu_moonshine_property_enabled", true);
+    Global_1940311.f_1433.f_54.f_93 = DatabindingAddDataBool(menuData, "player_menu_camp_and_property_enabled", true);
+    Global_1940311.f_1433.f_54.f_94 = DatabindingAddDataBool(menuData, "player_menu_moonshine_property_visible", true);
+    Global_1940311.f_1433.f_54.f_96 = DatabindingAddDataBool(menuData, "player_menu_pinned_enabled", true);
+end)
+
+--LaunchUiappByHashWithEntry(1976336482, 1261159557) -- Animals guide
+--LaunchUiappByHash(1976336482)
