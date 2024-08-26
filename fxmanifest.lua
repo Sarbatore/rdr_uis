@@ -11,3 +11,11 @@ client_scripts {
   "huds/*.lua",
   "menus/basic/*.lua",
 }
+
+escrow_ignore {
+  "loader.lua",
+  "example.lua",
+  "huds/*.lua",
+  "menus/*.lua",
+  "menus/basic/*.lua",
+}
