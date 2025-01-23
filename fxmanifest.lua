@@ -7,15 +7,6 @@ version "1.0"
 
 client_scripts {
   "loader.lua",
-  "example.lua",
-  "huds/*.lua",
-  "menus/basic/*.lua",
-}
-
-escrow_ignore {
-  "loader.lua",
-  "example.lua",
-  "huds/*.lua",
-  "menus/*.lua",
-  "menus/basic/*.lua",
+  "hud/*.lua",
+  "menu/**/*.lua",
 }

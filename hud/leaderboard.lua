@@ -1,3 +1,5 @@
+--@todo: Finish this file
+
 local postMatchAndLeaderboardContainer = DatabindingAddDataContainerFromPath("", "PostMatchAndLeaderboard")
 local titleContainer = DatabindingAddDataContainer(postMatchAndLeaderboardContainer, "Title")
 local leaderboardList = DatabindingAddUiItemList(postMatchAndLeaderboardContainer, "LeaderboardList")
@@ -74,46 +76,3 @@ LIB.LEADERBOARD.AddRow = function(position, gamertag, gamertagColor, statPriorit
 
 end
 exports("AddLeaderboardRow", LIB.LEADERBOARD.AddRow)
-
---[[
-
-    local playerItem = DatabindingAddDataContainer(l, "MiniListItem_00")
-    DatabindingAddDataString(playerItem, "Position", position)
-    DatabindingAddDataString(playerItem, "Gamertag", gamertag)
-    DatabindingAddDataInt(playerItem, "GamertagColor", gamertagColor)
-    DatabindingAddDataString(playerItem, "StatPriority", statPriority)
-
-    local leaderboardRow = DatabindingAddDataContainer(l, "LeaderboardListItem_00")
-	DatabindingAddDataInt(leaderboardRow, "Position", 0)
-	DatabindingAddDataBool(leaderboardRow, "ShowCross", false)
-	DatabindingAddDataHash(leaderboardRow, "CrossColor", joaat("COLOR_RED"))
-	DatabindingAddDataString(leaderboardRow, "Gamertag", "")
-	DatabindingAddDataInt(leaderboardRow, "GamertagColor", 0)
-	DatabindingAddDataBool(leaderboardRow, "ShowCrewTag", true)
-	DatabindingAddDataString(leaderboardRow, "CrewTag", "")
-	DatabindingAddDataBool(leaderboardRow, "ShowRank", true)
-	DatabindingAddDataString(leaderboardRow, "Rank", "0")
-	DatabindingAddDataBool(leaderboardRow, "Spectating", false)
-	DatabindingAddDataString(leaderboardRow, "Stat0", "")
-	DatabindingAddDataString(leaderboardRow, "Stat1", "")
-	DatabindingAddDataString(leaderboardRow, "Stat2", "")
-	DatabindingAddDataString(leaderboardRow, "Stat3", "")
-	DatabindingAddDataBool(leaderboardRow, "ShowBlip", true)
-	DatabindingAddDataInt(leaderboardRow, "BlipColor", 0)
-	DatabindingAddDataString(leaderboardRow, "Blip", "BLIP_AMBIENT_PED_MEDIUM")
-	DatabindingAddDataBool(leaderboardRow, "isHighlighted", false)
-	DatabindingAddDataBool(leaderboardRow, "HeadsetIconVisible", false)
-	DatabindingAddDataHash(leaderboardRow, "HeadsetIconColor", joaat("COLOR_PURE_WHITE"))
-	DatabindingAddDataBool(leaderboardRow, "ShowBlip", true)
-
-	DatabindingAddDataBool(postMatchAndLeaderboardContainer, "info_visible_06", true)
-	DatabindingAddDataBool(postMatchAndLeaderboardContainer, "info_visible_07", true)
-	DatabindingAddDataBool(postMatchAndLeaderboardContainer, "info_visible_08", true)
-	DatabindingAddDataString(postMatchAndLeaderboardContainer, "info_value_06", "aaa")
-	DatabindingAddDataString(postMatchAndLeaderboardContainer, "info_value_07", "bbb")
-	DatabindingAddDataString(postMatchAndLeaderboardContainer, "info_value_08", "cccc")
-
-	DatabindingAddDataInt(leaderboardRow, "SetOverlayImg", 1)
-	DatabindingAddDataBool(leaderboardRow, "ShowOverlay", false)
-
-]]

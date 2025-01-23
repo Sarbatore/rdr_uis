@@ -1,5 +1,5 @@
-local menuData = DatabindingAddDataContainerFromPath("", "player_menu_data")
-local itemsList = DatabindingAddUiItemList(DatabindingAddDataContainerFromPath("", "AnimalSightingMissions"), "listItems")
+local rootContainer = DatabindingAddDataContainerFromPath("", "player_menu_data")
+local itemList = DatabindingAddUiItemList(DatabindingAddDataContainerFromPath("", "AnimalSightingMissions"), "listItems")
 AddTextEntryByHash(-179955176, "") -- ANIMAL_SIGHTINGS_SUBH
 
 local currentMenu = nil
@@ -21,10 +21,10 @@ function Menu._construct(header)
     self.header = header
     self.subheader = ""
     self.footer = ""
-    self.footerColor = joaat("COLOR_WHITE")
-    self.isOpened = false
-    self.onOpened = nil
-    self.onClosed = nil
+    self.footerColor = `COLOR_WHITE`
+    self.isOpen = false
+    self.onOpen = nil
+    self.onClose = nil
     
     self.items = {}
 
@@ -34,12 +34,12 @@ end
 --- Set the menu opened callback
 ---@param callback function
 ---@return Menu
-function Menu:OnOpened(callback)
-    if (callback ~= nil) then self.onOpened = callback end
+function Menu:OnOpen(callback)
+    if (callback ~= nil) then self.onOpen = callback end
 
-    if (not callback and self.onOpened) then
-        self.isOpened = true
-        self.onOpened()
+    if (not callback and self.onOpen) then
+        self.isOpen = true
+        self.onOpen()
     end
 
     return self
@@ -48,12 +48,12 @@ end
 --- Set the menu closed callback
 ---@param callback function
 ---@return Menu
-function Menu:OnClosed(callback)
-    if (callback ~= nil) then self.onClosed = callback end
+function Menu:OnClose(callback)
+    if (callback ~= nil) then self.onClose = callback end
 
-    if (not callback and self.onClosed) then
-        self.isOpened = false
-        self.onClosed()
+    if (not callback and self.onClose) then
+        self.isOpen = false
+        self.onClose()
     end
 
     return self
@@ -65,9 +65,9 @@ end
 function Menu:SetHeader(text)
     if (text ~= nil) then self.header = text end
 
-    if (self.isOpened) then
+    if (self.isOpen) then
         print("Setting header text", self.header)
-        DatabindingAddDataString(menuData, "header_text", self.header)
+        DatabindingAddDataString(rootContainer, "header_text", self.header)
     end
 
     return self
@@ -79,7 +79,7 @@ end
 function Menu:SetSubheader(text)
     if (text ~= nil) then self.subheader = text end
 
-    if (self.isOpened) then
+    if (self.isOpen) then
         AddTextEntryByHash(-179955176, self.subheader)
     end
 
@@ -92,8 +92,8 @@ end
 function Menu:SetFooter(text)
     if (text ~= nil) then self.footer = text end
 
-    if (self.isOpened) then
-        DatabindingAddDataString(menuData, "footer_tooltip_text", self.footer)
+    if (self.isOpen) then
+        DatabindingAddDataString(rootContainer, "footer_tooltip_text", self.footer)
     end
 
     return self
@@ -105,8 +105,8 @@ end
 function Menu:SetFooterColor(color)
     if (color ~= nil) then self.footerColor = color end
 
-    if (self.isOpened) then
-        DatabindingAddDataHash(menuData, "footer_tooltip_color", self.footerColor)
+    if (self.isOpen) then
+        DatabindingAddDataHash(rootContainer, "footer_tooltip_color", self.footerColor)
     end
 
     return self
@@ -185,7 +185,7 @@ function Menu:RemoveItem(item)
     for k, v in pairs(self.items) do
         if (v.data == item.data) then
             table.remove(self.items, k)
-            DatabindingRemoveBindingArrayItemByDataContextId(itemsList, v.data)
+            DatabindingRemoveBindingArrayItemByDataContextId(itemList, v.data)
             break
         end
     end
@@ -204,7 +204,7 @@ end
 ---@param index integer
 ---@return entryId
 function Menu:GetItemEntryId(index)
-    return DatabindingGetItemContextByIndex(itemsList, index)
+    return DatabindingGetItemContextByIndex(itemList, index)
 end
 
 --- Get all items
@@ -229,8 +229,8 @@ end
 function Menu:Open()
     currentMenu = self
 
-    self.isOpened = true
-    DatabindingClearBindingArray(itemsList)
+    self.isOpen = true
+    DatabindingClearBindingArray(itemList)
 
     -- Init menu
     self:SetHeader()
@@ -239,21 +239,21 @@ function Menu:Open()
     self:SetFooterColor()
 
     for _, item in ipairs(self.items) do
-        item:init(itemsList)
+        item:init(itemList)
     end
 
-    LaunchUiappByHashWithEntry(joaat("PLAYER_MENU"), -464479041)
+    LaunchUiappByHashWithEntry(`PLAYER_MENU`, -464479041)
 
     Citizen.CreateThread(function()
-        while IsUiappRunningByHash(joaat("PLAYER_MENU")) == 1 and (not currentMenu or currentMenu == self) do
-            while EventsUiIsPending(joaat("PLAYER_MENU")) do
+        while IsUiappRunningByHash(`PLAYER_MENU`) == 1 and (not currentMenu or currentMenu == self) do
+            while EventsUiIsPending(`PLAYER_MENU`) do
                 local msg = DataView.ArrayBuffer(8 * 4)
                 msg:SetInt32(0, 0) -- Event type
                 msg:SetInt32(8, 0)
                 msg:SetInt32(16, 0)
                 msg:SetInt32(24, 0) -- Item data container
     
-                if (Citizen.InvokeNative(0x90237103F27F7937, joaat("PLAYER_MENU"), msg:Buffer()) ~= 0) then -- EVENTS_UI_PEEK_MESSAGE
+                if (Citizen.InvokeNative(0x90237103F27F7937, `PLAYER_MENU`, msg:Buffer()) ~= 0) then -- EVENTS_UI_PEEK_MESSAGE
                     -- Item unfocused
                     if (msg:GetInt32(0) == `ITEM_UNFOCUSED`) then
                         for k, v in ipairs(currentMenu.items) do
@@ -287,14 +287,14 @@ function Menu:Open()
                     end
                 end
     
-                EventsUiPopMessage(joaat("PLAYER_MENU"))
+                EventsUiPopMessage(`PLAYER_MENU`)
             end
             Citizen.Wait(0)
         end
-        self:OnClosed()
+        self:OnClose()
     end)
 
-    self:OnOpened()
+    self:OnOpen()
 
     return self
 end

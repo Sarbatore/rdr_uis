@@ -65,13 +65,3 @@ end
 function TRANSLATE:Close()
     CloseAppByHash(joaat("TRANSLATION_OVERLAY"))
 end
-
---[[
-
-local TRANSLATE = TRANSLATE()
-    :AddFirstField(0, "My title")
-    :AddSecondField(2, "Some text here")
-    :AddDivider()
-TRANSLATE:Open()
-
-]]
